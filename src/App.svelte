@@ -1,30 +1,28 @@
 <script>
-	export let name;
+  import Modal from "./Modal.svelte";
+
+  let show = false;
+
+  const openModal = () => {
+    show = true;
+    console.log("opening");
+  };
+  const closeModal = () => (show = false);
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  .btn {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    background: red;
+    color: white;
+  }
 </style>
+
+<button class="btn" on:click={openModal}>+</button>
+{#if show}
+  <Modal onClose={closeModal} />
+{/if}
