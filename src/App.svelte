@@ -1,28 +1,36 @@
-<script>
+<script lang="ts">
   import Modal from "./Modal.svelte";
 
-  let show = false;
+  export let username;
 
-  const openModal = () => {
-    show = true;
-    console.log("opening");
-  };
+  let show = false;
+  const openModal = () => (show = true);
   const closeModal = () => (show = false);
 </script>
 
 <style>
-  .btn {
+  .Btn {
+    z-index: 1993;
     position: absolute;
     right: 10px;
     bottom: 0;
     width: 100px;
     height: 100px;
-    background: red;
-    color: white;
+    background: cyan;
+    border-radius: 200%;
+  }
+
+  .CloseBtn {
+    width: 30px;
+    height: 30px;
+    border: 2px solid cyan;
+    border-radius: 200%;
   }
 </style>
 
-<button class="btn" on:click={openModal}>+</button>
+<button class="Btn" on:click={openModal}>+</button>
 {#if show}
-  <Modal onClose={closeModal} />
+  <Modal onClose={closeModal} {username}>
+    <button slot="CloseBtn" class="CloseBtn">X</button>
+  </Modal>
 {/if}
