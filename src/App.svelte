@@ -1,30 +1,36 @@
-<script>
-	export let name;
+<script lang="ts">
+  import Modal from "./Modal.svelte";
+
+  export let username;
+
+  let show = false;
+  const openModal = () => (show = true);
+  const closeModal = () => (show = false);
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+  .Btn {
+    z-index: 1993;
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    background: cyan;
+    border-radius: 200%;
+  }
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  .CloseBtn {
+    width: 30px;
+    height: 30px;
+    border: 2px solid cyan;
+    border-radius: 200%;
+  }
 </style>
+
+<button class="Btn" on:click={openModal}>+</button>
+{#if show}
+  <Modal onClose={closeModal} {username}>
+    <button slot="CloseBtn" class="CloseBtn">X</button>
+  </Modal>
+{/if}
