@@ -1,6 +1,7 @@
 <script lang="ts">
   type Event = "CreateEvent" | "WatchEvent";
   import events from "./api/github/events";
+  import Fetch from "./Fetch.svelte";
 
   export let username;
   export let onClose: () => void;
@@ -46,13 +47,13 @@
   <div class="Close" on:click={onClose}>
     <slot name="CloseBtn" />
   </div>
+  Events by {username}
+  <Fetch request={activityReq} let:data let:error>
+    <p slot="fallback">Loading..</p>
+    <p slot="error">Error: {error}</p>
 
-  {#await activityReq}
-    <p>Loading..</p>
-  {:then userActivityEvents}
-    Events:
     <ul>
-      {#each userActivityEvents as event}
+      {#each data as event}
         <li>
           <p>
             [{parseEventType(event.type)}]
@@ -61,7 +62,5 @@
         </li>
       {/each}
     </ul>
-  {:catch e}
-    <p>Error: {e.message}</p>
-  {/await}
+  </Fetch>
 </div>

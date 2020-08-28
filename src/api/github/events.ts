@@ -1,5 +1,6 @@
 async function get(username: string): Promise<GhEvent[]> {
   const res = await fetch(`https://api.github.com/users/${username}/events`);
+  if (!res.ok) throw new Error(res.statusText);
   return res.json();
 }
 
