@@ -1,6 +1,7 @@
 {
     "name": "github-btn-test",
     "version": "1.0.1-0",
+    "main": "build/main.js",
     "scripts": {
         "build": "rollup -c",
         "dev": "rollup -c -w",
