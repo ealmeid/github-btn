@@ -1,5 +1,5 @@
 {
-    "name": "@ealmeida/github-btn",
+    "name": "github-btn-test",
     "version": "1.0.0",
     "scripts": {
         "build": "rollup -c",
